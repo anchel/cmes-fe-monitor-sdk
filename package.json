@@ -1,0 +1,79 @@
+{
+  "name": "@cmeslib/fe-monitor-sdk",
+  "version": "1.0.0",
+  "description": "Self-hosted frontend monitoring SDK, compatible with the supplied Aegis 1.43.60 API and wire protocol",
+  "main": "./dist/cmes-monitor.cjs",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "check": "npm run typecheck && npm test && npm run test:browser",
+    "test:browser": "node tests/browser.mjs",
+    "dev": "npm run build && node examples/server.mjs",
+    "prepack": "npm run build",
+    "reconstruct": "node scripts/reconstruct.mjs",
+    "fixtures": "node scripts/protocol-fixtures.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anchel/cmes-fe-monitor-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/anchel/cmes-fe-monitor-sdk/issues"
+  },
+  "homepage": "https://github.com/anchel/cmes-fe-monitor-sdk#readme",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "devDependencies": {
+    "@babel/generator": "8.0.0",
+    "@babel/parser": "8.0.4",
+    "@babel/traverse": "8.0.4",
+    "@babel/types": "8.0.4",
+    "@sinonjs/fake-timers": "15.4.0",
+    "esbuild": "0.28.2",
+    "jsdom": "29.1.1",
+    "playwright": "1.63.0",
+    "prettier": "3.9.6",
+    "typescript": "7.0.2"
+  },
+  "type": "module",
+  "module": "./dist/cmes-monitor.esm.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/cmes-monitor.min.js",
+  "jsdelivr": "./dist/cmes-monitor.min.js",
+  "files": [
+    "dist",
+    "src",
+    "docs",
+    "examples",
+    "LICENSE",
+    "NOTICE",
+    "README.md",
+    "scripts",
+    "tests",
+    "reference/aegis-1.43.60.min.js",
+    "tsconfig.json"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/cmes-monitor.esm.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/cmes-monitor.cjs"
+      }
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

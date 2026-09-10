@@ -1,0 +1,22 @@
+@cmeslib/fe-monitor-sdk 1.0.0 is an independent, modified derivative of the supplied
+@tencent/aegis-web-sdk 1.43.60 browser bundle, not an official Tencent product.
+
+The supplied file carries this notice:
+  @tencent/aegis-web-sdk@1.43.60 (c) 2026 TencentCloud Real User Monitoring.
+  Author pumpkincai.
+  Last Release Time Tue Aug 25 2026 16:00:34 GMT+0800 (GMT+08:00).
+  Released under the MIT License.
+
+Reference SHA-256:
+7f1e3d7344a9a897342473a25fd1ea99b01327a1638615a3ba8d4edc7d37e91e
+
+Changes: extracted editable ES modules and 15 plugin modules, renamed shared
+bindings, expanded statement sequences, added package/types/build/tests/docs,
+changed the default backend base to /monitor, made the /rateConfig and
+/collect/whitelist control endpoints opt-in via enableRateConfig and
+enableWhitelist, and added CmesMonitor branding.
+Legacy API/property names and wire version are intentionally retained.
+
+The supplied minified file did not include a source map. Original TypeScript,
+comments, local variable names and original package layout cannot be recovered
+exactly; reconstructed code retains compiled state machines where necessary.

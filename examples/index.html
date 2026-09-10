@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>cmes-monitor-sdk 联调示例</title>
+<style>
+  body{font:16px/1.6 system-ui,sans-serif;max-width:1040px;margin:48px auto;padding:0 24px;background:#f8fafc;color:#172033}
+  h1{font-size:30px}code{background:#e2e8f0;padding:3px 6px;border-radius:4px}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}button{padding:12px 16px;border:1px solid #ccd6e0;background:white;border-radius:8px;cursor:pointer;font:inherit}
+  button:hover{background:#e0f2fe}pre{background:#10213b;color:#ddedff;padding:20px;border-radius:12px;overflow:auto;max-height:600px;font-size:13px}
+</style>
+<h1>cmes-monitor-sdk 联调示例</h1>
+<p>上报地址：<code>/monitor</code>。点击按钮，查看接收端解析出的日志、事件和性能数据。</p>
+<div class="actions">
+  <button id="log">普通日志</button><button id="event">业务事件</button><button id="time">自定义耗时</button>
+  <button id="error">JS 错误</button><button id="rejection">Promise 异常</button>
+  <button id="request">接口请求</button><button id="api-error">接口错误</button><button id="pv">虚拟 PV</button>
+</div>
+<p id="status">等待上报…</p><pre id="reports">[]</pre>
+<script src="/dist/cmes-monitor.js"></script>
+<script>
+  const monitor=window.monitor=new CmesMonitor({
+    id:'cmes-demo',uin:'demo-user',hostUrl:'/monitor',reportApiSpeed:true,reportAssetSpeed:true,
+    delay:200,spa:true,api:{apiDetail:true},gzip:true,ext1:'local-demo',
+    // 联调接收端实现了这两个控制端点，这里打开以演示白名单过滤与分类采样；两者默认关闭。
+    enableWhitelist:true,enableRateConfig:true
+  });
+  document.querySelector('#log').onclick=()=>monitor.infoAll('你好，CMES',{page:'demo'});
+  document.querySelector('#event').onclick=()=>monitor.reportEvent({name:'demo_click',ext1:'button'});
+  document.querySelector('#time').onclick=()=>{monitor.time('demo_work');setTimeout(()=>monitor.timeEnd('demo_work'),120);};
+  document.querySelector('#error').onclick=()=>{setTimeout(()=>{throw new Error('CMES 演示错误');},0);};
+  document.querySelector('#rejection').onclick=()=>Promise.reject(new Error('CMES Promise 演示异常'));
+  document.querySelector('#request').onclick=()=>fetch('/api/orders');
+  document.querySelector('#api-error').onclick=()=>fetch('/api/error');
+  document.querySelector('#pv').onclick=()=>monitor.reportPageView(location.origin+'/virtual-page');
+  setInterval(async()=>{
+    try{const records=await(await fetch('/monitor/__requests')).json();
+      document.querySelector('#status').textContent=`已收到 ${records.length} 个上报请求（保留最近 500 个）`;
+      document.querySelector('#reports').textContent=JSON.stringify(records.slice(-12),null,2);
+    }catch(error){document.querySelector('#status').textContent=error.message;}
+  },1000);
+</script>
+</html>

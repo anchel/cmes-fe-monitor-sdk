@@ -1,0 +1,4361 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "cmes-monitor-sdk compatible receiver",
+    "version": "1.0.0",
+    "description": "Derived from supplied Aegis 1.43.60. See backend-protocol.md for transport quirks and inactive cross-platform paths."
+  },
+  "servers": [
+    {
+      "url": "/monitor",
+      "description": "替换为你的 hostUrl"
+    }
+  ],
+  "paths": {
+    "/rateConfig": {
+      "get": {
+        "summary": "分类采样配置（可选端点，需 enableRateConfig: true）",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "sample_rate 单位 0…100；ttl 单位秒",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RateConfig"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collect/whitelist": {
+      "get": {
+        "summary": "日志白名单、全局采样及 gzip 协商（可选端点，需 enableWhitelist: true）",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "rate 单位 0…1；use_gzip 为 0/1",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Whitelist"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collect": {
+      "post": {
+        "summary": "批量列式日志",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          }
+        ],
+        "description": "可能有 Content-Encoding:gzip。先解压。Beacon 的 Content-Type 可为 text/plain。",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogColumns"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "string",
+                "description": "与 application/json 相同的 JSON 文本；先解压再解析"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "SDK 自身诊断或自定义 GET 传输",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "msg[0]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "level[0]",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collect/events": {
+      "post": {
+        "summary": "自定义事件",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          }
+        ],
+        "description": "可能有 Content-Encoding:gzip。先解压。Beacon 的 Content-Type 可为 text/plain。",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NestedPayload"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "string",
+                "description": "与 application/json 相同的 JSON 文本；先解压再解析"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/speed": {
+      "post": {
+        "summary": "Fetch/XHR/资源/Bridge 测速",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          }
+        ],
+        "description": "可能有 Content-Encoding:gzip。先解压。Beacon 的 Content-Type 可为 text/plain。",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NestedPayload"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "string",
+                "description": "与 application/json 相同的 JSON 文本；先解压再解析"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/speed/custom": {
+      "post": {
+        "summary": "自定义耗时",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          }
+        ],
+        "description": "可能有 Content-Encoding:gzip。先解压。Beacon 的 Content-Type 可为 text/plain。",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NestedPayload"
+              }
+            },
+            "text/plain": {
+              "schema": {
+                "type": "string",
+                "description": "与 application/json 相同的 JSON 文本；先解压再解析"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/collect/pv": {
+      "get": {
+        "summary": "PV",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "description": "GET 或 Beacon POST，指标均在查询参数。body 可为空。"
+      },
+      "post": {
+        "summary": "PV",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "description": "GET 或 Beacon POST，指标均在查询参数。body 可为空。"
+      }
+    },
+    "/speed/performance": {
+      "get": {
+        "summary": "页面性能",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "dnsLookup",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "tcp",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "ssl",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "ttfb",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "contentDownload",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "domParse",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "resourceDownload",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "firstScreenTiming",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "engineInit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "bundleLoad",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "description": "GET 或 Beacon POST，指标均在查询参数。body 可为空。"
+      },
+      "post": {
+        "summary": "页面性能",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "dnsLookup",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "tcp",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "ssl",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "ttfb",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "contentDownload",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "domParse",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "resourceDownload",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "firstScreenTiming",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "engineInit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "bundleLoad",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "description": "GET 或 Beacon POST，指标均在查询参数。body 可为空。"
+      }
+    },
+    "/speed/webvitals": {
+      "get": {
+        "summary": "Web Vitals",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "FCP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "LCP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "FID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "CLS",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "INP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "TTI",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "description": "GET 或 Beacon POST，指标均在查询参数。body 可为空。"
+      },
+      "post": {
+        "summary": "Web Vitals",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "FCP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "LCP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "FID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "CLS",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "INP",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "TTI",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "description": "GET 或 Beacon POST，指标均在查询参数。body 可为空。"
+      }
+    },
+    "/memory": {
+      "get": {
+        "summary": "内存指标",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "memoryUsed",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "memoryAllocated",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "memoryUsage",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "description": "GET 或 Beacon POST，指标均在查询参数。body 可为空。"
+      },
+      "post": {
+        "summary": "内存指标",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "项目标识"
+          },
+          {
+            "name": "uin",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "用户标识"
+          },
+          {
+            "name": "aid",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "匿名标识"
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SDK wire 版本，默认 1.43.60"
+          },
+          {
+            "name": "env",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "环境"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "页面 URL"
+          },
+          {
+            "name": "originFrom",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "实际页面 URL"
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "会话"
+          },
+          {
+            "name": "referer",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "来源页面"
+          },
+          {
+            "name": "sampled",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "成功取得限流配置时为 1"
+          },
+          {
+            "name": "platform",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "平台"
+          },
+          {
+            "name": "netType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络类型"
+          },
+          {
+            "name": "netStatus",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "网络状态"
+          },
+          {
+            "name": "vp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "视口"
+          },
+          {
+            "name": "sr",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "屏幕"
+          },
+          {
+            "name": "ext1",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext2",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext3",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext4",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext5",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext6",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext7",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext8",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext9",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "ext10",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "扩展字段"
+          },
+          {
+            "name": "memoryUsed",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "memoryAllocated",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          },
+          {
+            "name": "memoryUsage",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "指标值通过查询字符串传递"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "接收成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "description": "指标来自查询参数，原 SDK body 可能为 [object Object]，不得要求其为合法 JSON。"
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Success": {
+        "type": "object",
+        "properties": {
+          "retcode": {
+            "const": 0
+          }
+        },
+        "required": [
+          "retcode"
+        ]
+      },
+      "RateConfig": {
+        "type": "object",
+        "required": [
+          "retcode",
+          "configs"
+        ],
+        "properties": {
+          "retcode": {
+            "const": 0
+          },
+          "ttl": {
+            "type": "number",
+            "description": "秒"
+          },
+          "configs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "limit_type",
+                "sample_rate"
+              ],
+              "properties": {
+                "limit_type": {
+                  "type": "string",
+                  "enum": [
+                    "log",
+                    "jsError",
+                    "whiteScreen",
+                    "assetsException",
+                    "speed",
+                    "performance",
+                    "webvitals",
+                    "pv",
+                    "event",
+                    "custom",
+                    "miniProgramData"
+                  ]
+                },
+                "sample_rate": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              }
+            }
+          }
+        }
+      },
+      "Whitelist": {
+        "type": "object",
+        "required": [
+          "retcode",
+          "result"
+        ],
+        "properties": {
+          "retcode": {
+            "const": 0
+          },
+          "result": {
+            "type": "object",
+            "properties": {
+              "is_in_white_list": {
+                "type": "boolean"
+              },
+              "rate": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              "use_gzip": {
+                "oneOf": [
+                  {
+                    "type": "integer",
+                    "enum": [
+                      0,
+                      1
+                    ]
+                  },
+                  {
+                    "type": "string",
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "LogColumns": {
+        "type": "object",
+        "required": [
+          "count",
+          "msg",
+          "level"
+        ],
+        "properties": {
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "msg": {
+            "type": "array",
+            "items": {}
+          },
+          "level": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": {
+          "type": "array",
+          "items": {}
+        },
+        "description": "按列存储，按下标还原 count 条记录，列包括 ext1…ext10、errorMsg、time、trace、originFrom 等。"
+      },
+      "NestedPayload": {
+        "type": "object",
+        "required": [
+          "payload"
+        ],
+        "properties": {
+          "payload": {
+            "type": "string",
+            "description": "字符串内还是 JSON：events 为 Event[]；speed 为 SpeedPayload；custom 为 {custom: CustomTime[]}"
+          }
+        }
+      },
+      "Event": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "originFrom": {
+            "type": "string"
+          },
+          "ext1": {
+            "type": "string"
+          },
+          "ext2": {
+            "type": "string"
+          },
+          "ext3": {
+            "type": "string"
+          },
+          "ext4": {
+            "type": "string"
+          },
+          "ext5": {
+            "type": "string"
+          },
+          "ext6": {
+            "type": "string"
+          },
+          "ext7": {
+            "type": "string"
+          },
+          "ext8": {
+            "type": "string"
+          },
+          "ext9": {
+            "type": "string"
+          },
+          "ext10": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      },
+      "CustomTime": {
+        "type": "object",
+        "required": [
+          "name",
+          "duration"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 2147483646
+          }
+        },
+        "additionalProperties": true
+      },
+      "SpeedLog": {
+        "type": "object",
+        "required": [
+          "url",
+          "type",
+          "duration"
+        ],
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "fetch",
+              "static",
+              "bridge"
+            ]
+          },
+          "duration": {
+            "type": "number"
+          },
+          "status": {
+            "type": "number"
+          },
+          "method": {
+            "type": "string"
+          },
+          "ret": {
+            "type": [
+              "string",
+              "number"
+            ]
+          },
+          "isErr": {
+            "type": "number"
+          },
+          "isHttps": {
+            "type": "boolean"
+          },
+          "domainLookup": {
+            "type": "number"
+          },
+          "connectTime": {
+            "type": "number"
+          },
+          "transferSize": {
+            "type": "number"
+          }
+        },
+        "additionalProperties": true
+      },
+      "SpeedPayload": {
+        "type": "object",
+        "required": [
+          "duration"
+        ],
+        "properties": {
+          "duration": {
+            "type": "object",
+            "properties": {
+              "fetch": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SpeedLog"
+                }
+              },
+              "static": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SpeedLog"
+                }
+              },
+              "bridge": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SpeedLog"
+                }
+              }
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}

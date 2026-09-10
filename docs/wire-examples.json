@@ -1,0 +1,343 @@
+{
+  "source": "Captured from supplied Aegis 1.43.60 in a deterministic browser sandbox",
+  "examples": [
+    {
+      "method": "GET",
+      "url": "https://collector.example.test/monitor/collect/whitelist?id=project-test&uin=user-test&version=1.43.60&aid=aid-test&env=production&ext1=demo&sessionId=2e9e0d500ff84789bc67c571bd52f177&from=https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start&referer=https%3A%2F%2Fapp.example.test%2Flogin",
+      "headers": {},
+      "body": null,
+      "decoded": {
+        "path": "/monitor/collect/whitelist",
+        "query": {
+          "id": "project-test",
+          "uin": "user-test",
+          "version": "1.43.60",
+          "aid": "aid-test",
+          "env": "production",
+          "ext1": "demo",
+          "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+          "from": "https://app.example.test/home?lang=zh#start",
+          "referer": "https://app.example.test/login"
+        },
+        "encoding": "identity",
+        "rawBody": "",
+        "body": null,
+        "payload": null,
+        "records": []
+      }
+    },
+    {
+      "method": "GET",
+      "url": "https://collector.example.test/monitor/rateConfig?id=project-test&uin=user-test&version=1.43.60&aid=aid-test&env=production&ext1=demo&sessionId=2e9e0d500ff84789bc67c571bd52f177&from=https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start&referer=https%3A%2F%2Fapp.example.test%2Flogin",
+      "headers": {},
+      "body": null,
+      "decoded": {
+        "path": "/monitor/rateConfig",
+        "query": {
+          "id": "project-test",
+          "uin": "user-test",
+          "version": "1.43.60",
+          "aid": "aid-test",
+          "env": "production",
+          "ext1": "demo",
+          "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+          "from": "https://app.example.test/home?lang=zh#start",
+          "referer": "https://app.example.test/login"
+        },
+        "encoding": "identity",
+        "rawBody": "",
+        "body": null,
+        "payload": null,
+        "records": []
+      }
+    },
+    {
+      "method": "GET",
+      "url": "https://collector.example.test/monitor/collect/pv?originFrom=https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start&sampled=1&id=project-test&uin=user-test&version=1.43.60&aid=aid-test&env=production&ext1=demo&sessionId=2e9e0d500ff84789bc67c571bd52f177&from=https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start&referer=https%3A%2F%2Fapp.example.test%2Flogin",
+      "headers": {},
+      "body": null,
+      "decoded": {
+        "path": "/monitor/collect/pv",
+        "query": {
+          "originFrom": "https://app.example.test/home?lang=zh#start",
+          "sampled": "1",
+          "id": "project-test",
+          "uin": "user-test",
+          "version": "1.43.60",
+          "aid": "aid-test",
+          "env": "production",
+          "ext1": "demo",
+          "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+          "from": "https://app.example.test/home?lang=zh#start",
+          "referer": "https://app.example.test/login"
+        },
+        "encoding": "identity",
+        "rawBody": "",
+        "body": null,
+        "payload": null,
+        "records": [
+          {
+            "originFrom": "https://app.example.test/home?lang=zh#start",
+            "sampled": "1",
+            "id": "project-test",
+            "uin": "user-test",
+            "version": "1.43.60",
+            "aid": "aid-test",
+            "env": "production",
+            "ext1": "demo",
+            "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+            "from": "https://app.example.test/home?lang=zh#start",
+            "referer": "https://app.example.test/login"
+          }
+        ]
+      }
+    },
+    {
+      "method": "GET",
+      "url": "https://collector.example.test/monitor/collect/pv?originFrom=https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start&from=https%3A%2F%2Fapp.example.test%2Fcheckout&sampled=1&id=project-test&uin=user-test&version=1.43.60&aid=aid-test&env=production&ext1=demo&sessionId=2e9e0d500ff84789bc67c571bd52f177&referer=https%3A%2F%2Fapp.example.test%2Flogin",
+      "headers": {},
+      "body": null,
+      "decoded": {
+        "path": "/monitor/collect/pv",
+        "query": {
+          "originFrom": "https://app.example.test/home?lang=zh#start",
+          "from": "https://app.example.test/checkout",
+          "sampled": "1",
+          "id": "project-test",
+          "uin": "user-test",
+          "version": "1.43.60",
+          "aid": "aid-test",
+          "env": "production",
+          "ext1": "demo",
+          "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+          "referer": "https://app.example.test/login"
+        },
+        "encoding": "identity",
+        "rawBody": "",
+        "body": null,
+        "payload": null,
+        "records": [
+          {
+            "originFrom": "https://app.example.test/home?lang=zh#start",
+            "from": "https://app.example.test/checkout",
+            "sampled": "1",
+            "id": "project-test",
+            "uin": "user-test",
+            "version": "1.43.60",
+            "aid": "aid-test",
+            "env": "production",
+            "ext1": "demo",
+            "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+            "referer": "https://app.example.test/login"
+          }
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "url": "https://collector.example.test/monitor/collect?sampled=1&id=project-test&uin=user-test&version=1.43.60&aid=aid-test&env=production&ext1=demo&sessionId=2e9e0d500ff84789bc67c571bd52f177&from=https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start&referer=https%3A%2F%2Fapp.example.test%2Flogin",
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"level\":[\"4\"],\"msg\":[\"订单提交失败\"],\"originFrom\":[\"https://app.example.test/home?lang=zh#start\"],\"ext2\":[\"order-42\"],\"count\":1}",
+      "decoded": {
+        "path": "/monitor/collect",
+        "query": {
+          "sampled": "1",
+          "id": "project-test",
+          "uin": "user-test",
+          "version": "1.43.60",
+          "aid": "aid-test",
+          "env": "production",
+          "ext1": "demo",
+          "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+          "from": "https://app.example.test/home?lang=zh#start",
+          "referer": "https://app.example.test/login"
+        },
+        "encoding": "identity",
+        "rawBody": "{\"level\":[\"4\"],\"msg\":[\"订单提交失败\"],\"originFrom\":[\"https://app.example.test/home?lang=zh#start\"],\"ext2\":[\"order-42\"],\"count\":1}",
+        "body": {
+          "level": [
+            "4"
+          ],
+          "msg": [
+            "订单提交失败"
+          ],
+          "originFrom": [
+            "https://app.example.test/home?lang=zh#start"
+          ],
+          "ext2": [
+            "order-42"
+          ],
+          "count": 1
+        },
+        "payload": null,
+        "records": [
+          {
+            "level": "4",
+            "msg": "订单提交失败",
+            "originFrom": "https://app.example.test/home?lang=zh#start",
+            "ext2": "order-42"
+          }
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "url": "https://collector.example.test/monitor/collect/events?sampled=1&id=project-test&uin=user-test&version=1.43.60&aid=aid-test&env=production&ext1=demo&sessionId=2e9e0d500ff84789bc67c571bd52f177&from=https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start&referer=https%3A%2F%2Fapp.example.test%2Flogin",
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"payload\":\"[{\\\"name\\\":\\\"checkout\\\",\\\"ext1\\\":\\\"cart\\\",\\\"originFrom\\\":\\\"https://app.example.test/home?lang=zh#start\\\"}]\"}",
+      "decoded": {
+        "path": "/monitor/collect/events",
+        "query": {
+          "sampled": "1",
+          "id": "project-test",
+          "uin": "user-test",
+          "version": "1.43.60",
+          "aid": "aid-test",
+          "env": "production",
+          "ext1": "demo",
+          "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+          "from": "https://app.example.test/home?lang=zh#start",
+          "referer": "https://app.example.test/login"
+        },
+        "encoding": "identity",
+        "rawBody": "{\"payload\":\"[{\\\"name\\\":\\\"checkout\\\",\\\"ext1\\\":\\\"cart\\\",\\\"originFrom\\\":\\\"https://app.example.test/home?lang=zh#start\\\"}]\"}",
+        "body": {
+          "payload": "[{\"name\":\"checkout\",\"ext1\":\"cart\",\"originFrom\":\"https://app.example.test/home?lang=zh#start\"}]"
+        },
+        "payload": [
+          {
+            "name": "checkout",
+            "ext1": "cart",
+            "originFrom": "https://app.example.test/home?lang=zh#start"
+          }
+        ],
+        "records": [
+          {
+            "name": "checkout",
+            "ext1": "cart",
+            "originFrom": "https://app.example.test/home?lang=zh#start"
+          }
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "url": "https://collector.example.test/monitor/speed/custom?sampled=1&id=project-test&uin=user-test&version=1.43.60&aid=aid-test&env=production&ext1=demo&sessionId=2e9e0d500ff84789bc67c571bd52f177&from=https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start&referer=https%3A%2F%2Fapp.example.test%2Flogin",
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"payload\":\"{\\\"custom\\\":[{\\\"name\\\":\\\"checkout_duration\\\",\\\"duration\\\":123,\\\"ext1\\\":\\\"demo\\\",\\\"ext2\\\":\\\"\\\",\\\"ext3\\\":\\\"done\\\"}]}\"}",
+      "decoded": {
+        "path": "/monitor/speed/custom",
+        "query": {
+          "sampled": "1",
+          "id": "project-test",
+          "uin": "user-test",
+          "version": "1.43.60",
+          "aid": "aid-test",
+          "env": "production",
+          "ext1": "demo",
+          "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+          "from": "https://app.example.test/home?lang=zh#start",
+          "referer": "https://app.example.test/login"
+        },
+        "encoding": "identity",
+        "rawBody": "{\"payload\":\"{\\\"custom\\\":[{\\\"name\\\":\\\"checkout_duration\\\",\\\"duration\\\":123,\\\"ext1\\\":\\\"demo\\\",\\\"ext2\\\":\\\"\\\",\\\"ext3\\\":\\\"done\\\"}]}\"}",
+        "body": {
+          "payload": "{\"custom\":[{\"name\":\"checkout_duration\",\"duration\":123,\"ext1\":\"demo\",\"ext2\":\"\",\"ext3\":\"done\"}]}"
+        },
+        "payload": {
+          "custom": [
+            {
+              "name": "checkout_duration",
+              "duration": 123,
+              "ext1": "demo",
+              "ext2": "",
+              "ext3": "done"
+            }
+          ]
+        },
+        "records": [
+          {
+            "name": "checkout_duration",
+            "duration": 123,
+            "ext1": "demo",
+            "ext2": "",
+            "ext3": "done"
+          }
+        ]
+      }
+    },
+    {
+      "method": "POST",
+      "url": "https://collector.example.test/monitor/speed?sampled=1&id=project-test&uin=user-test&version=1.43.60&aid=aid-test&env=production&ext1=demo&sessionId=2e9e0d500ff84789bc67c571bd52f177&from=https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start&referer=https%3A%2F%2Fapp.example.test%2Flogin&netType=100",
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"payload\":\"{\\\"duration\\\":{\\\"fetch\\\":[{\\\"url\\\":\\\"https://api.example.test/orders\\\",\\\"method\\\":\\\"POST\\\",\\\"type\\\":\\\"fetch\\\",\\\"duration\\\":87,\\\"status\\\":200,\\\"ret\\\":\\\"0\\\",\\\"isErr\\\":0}],\\\"static\\\":[],\\\"bridge\\\":[]},\\\"id\\\":\\\"project-test\\\",\\\"uin\\\":\\\"user-test\\\",\\\"version\\\":\\\"1.43.60\\\",\\\"aid\\\":\\\"aid-test\\\",\\\"env\\\":\\\"production\\\",\\\"ext1\\\":\\\"demo\\\",\\\"sessionId\\\":\\\"2e9e0d500ff84789bc67c571bd52f177\\\",\\\"from\\\":\\\"https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start\\\",\\\"referer\\\":\\\"https%3A%2F%2Fapp.example.test%2Flogin\\\",\\\"netType\\\":100}\"}",
+      "decoded": {
+        "path": "/monitor/speed",
+        "query": {
+          "sampled": "1",
+          "id": "project-test",
+          "uin": "user-test",
+          "version": "1.43.60",
+          "aid": "aid-test",
+          "env": "production",
+          "ext1": "demo",
+          "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+          "from": "https://app.example.test/home?lang=zh#start",
+          "referer": "https://app.example.test/login",
+          "netType": "100"
+        },
+        "encoding": "identity",
+        "rawBody": "{\"payload\":\"{\\\"duration\\\":{\\\"fetch\\\":[{\\\"url\\\":\\\"https://api.example.test/orders\\\",\\\"method\\\":\\\"POST\\\",\\\"type\\\":\\\"fetch\\\",\\\"duration\\\":87,\\\"status\\\":200,\\\"ret\\\":\\\"0\\\",\\\"isErr\\\":0}],\\\"static\\\":[],\\\"bridge\\\":[]},\\\"id\\\":\\\"project-test\\\",\\\"uin\\\":\\\"user-test\\\",\\\"version\\\":\\\"1.43.60\\\",\\\"aid\\\":\\\"aid-test\\\",\\\"env\\\":\\\"production\\\",\\\"ext1\\\":\\\"demo\\\",\\\"sessionId\\\":\\\"2e9e0d500ff84789bc67c571bd52f177\\\",\\\"from\\\":\\\"https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start\\\",\\\"referer\\\":\\\"https%3A%2F%2Fapp.example.test%2Flogin\\\",\\\"netType\\\":100}\"}",
+        "body": {
+          "payload": "{\"duration\":{\"fetch\":[{\"url\":\"https://api.example.test/orders\",\"method\":\"POST\",\"type\":\"fetch\",\"duration\":87,\"status\":200,\"ret\":\"0\",\"isErr\":0}],\"static\":[],\"bridge\":[]},\"id\":\"project-test\",\"uin\":\"user-test\",\"version\":\"1.43.60\",\"aid\":\"aid-test\",\"env\":\"production\",\"ext1\":\"demo\",\"sessionId\":\"2e9e0d500ff84789bc67c571bd52f177\",\"from\":\"https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start\",\"referer\":\"https%3A%2F%2Fapp.example.test%2Flogin\",\"netType\":100}"
+        },
+        "payload": {
+          "duration": {
+            "fetch": [
+              {
+                "url": "https://api.example.test/orders",
+                "method": "POST",
+                "type": "fetch",
+                "duration": 87,
+                "status": 200,
+                "ret": "0",
+                "isErr": 0
+              }
+            ],
+            "static": [],
+            "bridge": []
+          },
+          "id": "project-test",
+          "uin": "user-test",
+          "version": "1.43.60",
+          "aid": "aid-test",
+          "env": "production",
+          "ext1": "demo",
+          "sessionId": "2e9e0d500ff84789bc67c571bd52f177",
+          "from": "https%3A%2F%2Fapp.example.test%2Fhome%3Flang%3Dzh%23start",
+          "referer": "https%3A%2F%2Fapp.example.test%2Flogin",
+          "netType": 100
+        },
+        "records": [
+          {
+            "url": "https://api.example.test/orders",
+            "method": "POST",
+            "type": "fetch",
+            "duration": 87,
+            "status": 200,
+            "ret": "0",
+            "isErr": 0
+          }
+        ]
+      }
+    }
+  ]
+}
