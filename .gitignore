@@ -3,4 +3,5 @@ coverage/
 *.tgz
 *-source.tar.gz
 .DS_Store
+.idea
 dist/
