@@ -37,6 +37,7 @@ export interface ApiConfig {
   reqHeaders?: string[]; resHeaders?: string[]; usePerformanceTiming?: boolean;
   injectTraceHeader?: 'traceparent' | 'sw8' | 'b3' | 'sentry-trace';
   injectTraceUrls?: UrlMatcher[]; injectTraceIgnoreUrls?: UrlMatcher[]; traceFlag?: boolean | number;
+  /** 显式配置后才判断业务返回码；未配置时不自动解析 code/ret 等字段。 */
   retCodeHandler?: (response: unknown, url?: string, ctx?: unknown, payload?: unknown) => { code?: string | number; isErr?: boolean };
   reqParamHandler?: (payload: unknown, url?: string, ctx?: unknown) => unknown;
   resBodyHandler?: (body: unknown, url?: string, ctx?: unknown) => unknown;

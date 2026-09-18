@@ -186,7 +186,7 @@ new CmesMonitor({ id: 'project', hostUrl: '/monitor', enableWhitelist: true, ena
 
 `fetch` 同时承载 Fetch 和 XHR。指标单位通常是毫秒，资源还可能含 `isHttps`、`method`、`urlQuery`、`nextHopProtocol`、`domainLookup`、`connectTime`、`transferSize` 等，未知值可能为 `-1`。以 [参考样本](wire-examples.json) 和插件中的 `generateLog()` 为准。JSON 内层 bean 的编码与 URL 查询解析结果不同，不要强制把它们视为同一层的解码值。
 
-业务返回码默认从响应 JSON 的 `ret`、`retcode`、`code`、`errcode`（忽略大小写）中读取；可由 `api.retCodeHandler` 覆盖。Trace Header 支持 `traceparent`、`b3`、`sw8`、`sentry-trace`；相关 Trace 信息也可进入日志 `trace` 字段。
+业务返回码仅在显式配置函数 `api.retCodeHandler` 时判断。未配置时不解析响应业务码，`ret` 为 `unknown`，不填充业务判定的 `isErr`；处理器未返回布尔 `isErr` 或抛异常时也不填充该标记。旧版从 `ret`、`retcode`、`code`、`errcode` 自动解析的逻辑保留在源码中，但默认不执行；仅配置 `api.ret` 或 `retCodeHandlerAsync` 不会启用判断。Trace Header 支持 `traceparent`、`b3`、`sw8`、`sentry-trace`；相关 Trace 信息也可进入日志 `trace` 字段。
 
 ## 7. 自定义耗时 /speed/custom
 

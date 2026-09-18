@@ -121,7 +121,9 @@ test('error/rejection/resource capture and console/click plugins emit compatible
 
 test('fetch/XHR timing, return-code parsing, trace headers and speed payload match',async()=>{
   const result=same(await compareScenario(async env=>{
-    env.create({reportApiSpeed:true,api:{apiDetail:true,reportRequest:true,injectTraceHeader:'traceparent'}});
+    const sdk=env.create({reportApiSpeed:true,api:{apiDetail:true,reportRequest:true,injectTraceHeader:'traceparent'}});
+    // CMES 仅显式启用业务码判断；本用例继续验证启用后的上游兼容性。
+    sdk.config.api.retCodeHandler=data=>{const value=JSON.parse(data);return {code:String(value.retcode),isErr:value.retcode!==0};};
     await env.clock.tickAsync(700);
     await env.run(`fetch('https://api.example.test/orders',{method:'POST',body:'{"sku":"demo"}',headers:{'content-type':'application/json'}})`);
     env.run(`var xhr=new XMLHttpRequest();xhr.open('GET','https://api.example.test/users');xhr.send();`);
@@ -205,6 +207,7 @@ test('persistent retry repeats failed logs and cleans the bounded queue on exhau
 test('Bridge callback preserves duration and payload',async()=>{
   const result=same(await compareScenario(async env=>{
     env.run(`var bridgeResult;var sdk=new Aegis({id:'bridge',uin:'u',hostUrl:'https://collector.example.test/monitor',delay:20,gzip:false,onError:false,device:false,pagePerformance:false,webVitals:false,onClose:false,reportBridgeSpeed:true,enableWhitelist:true,enableRateConfig:true,
+      api:{retCodeHandler:function(data){return {code:String(data.retcode),isErr:data.retcode!==0}}},
       h5Bridge:{call:function(service,method,params,callback){setTimeout(function(){callback({retcode:0,value:'done'})},8)}},h5BridgeFunc:['call']});`);
     await env.clock.tickAsync(700);
     env.run(`sdk.config.h5Bridge.call('device','read',{},function(data){bridgeResult=data});`);

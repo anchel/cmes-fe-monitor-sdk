@@ -114,7 +114,7 @@ export default function createReportApiSpeedOptions(shared) {
                       var t =
                         ((e.payload = null == m ? void 0 : m.body),
                         (e.ret = l),
-                        (e.isErr = +c),
+                        ("boolean" === typeof c && (e.isErr = +c)),
                         (e.from = v || S.getFromParam(E)),
                         {
                           msg: t,
@@ -406,6 +406,11 @@ export default function createReportApiSpeedOptions(shared) {
                         var i;
                         var o;
                         var a;
+                        // 默认返回码解析保留；只有显式 retCodeHandler 才启用判断。
+                        if ("function" !== typeof (null == t ? void 0 : t.retCodeHandler)) {
+                          null != r && r({ code: shared.UNKNOWN });
+                          return;
+                        }
                         try {
                           if (
                             "function" ==
@@ -486,11 +491,7 @@ export default function createReportApiSpeedOptions(shared) {
                               isErr: !1,
                             });
                         } catch (e) {
-                          null != r &&
-                            r({
-                              code: shared.UNKNOWN,
-                              isErr: !1,
-                            });
+                          null != r && r({ code: shared.UNKNOWN });
                         }
                       })(
                         f.response,
@@ -521,7 +522,7 @@ export default function createReportApiSpeedOptions(shared) {
                             })
                             .join("\n\n");
                           r.ret = t;
-                          r.isErr = +e;
+                          "boolean" === typeof e && (r.isErr = +e);
                           r.payload = h;
                           b.slowApiLog &&
                           (0, shared.isSlowApi)(

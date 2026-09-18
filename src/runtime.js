@@ -508,6 +508,9 @@ export default function createRuntime() {
       : /^https/.test(e);
   }
   function parseReturnCode(e, t, n) {
+    // 业务码判断必须显式配置；下方默认解析逻辑保留，但不自动启用。
+    if ("function" !== typeof (null == t ? void 0 : t.retCodeHandler))
+      return { code: UNKNOWN };
     var r;
     var i;
     var o;
@@ -552,10 +555,7 @@ export default function createRuntime() {
             isErr: !1,
           };
     } catch (e) {
-      return {
-        code: UNKNOWN,
-        isErr: !1,
-      };
+      return { code: UNKNOWN };
     }
   }
   function formatApiContent(e, t, n) {

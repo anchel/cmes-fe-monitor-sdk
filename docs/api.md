@@ -67,6 +67,7 @@ const monitor = new CmesMonitor({
     resHeaders: ['content-type'],
     injectTraceHeader: 'traceparent',
     injectTraceUrls: [/\/api\//],
+    // 显式配置后才判断业务返回码；省略时不自动解析 code/ret 等字段。
     retCodeHandler(data) {
       const json = typeof data === 'string' ? JSON.parse(data) : data;
       return { code: json.code, isErr: json.code !== 0 };

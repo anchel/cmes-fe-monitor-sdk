@@ -46,9 +46,9 @@ export default function createReportBridgeSpeedOptions(shared) {
                 duration: Date.now() - a,
                 type: "bridge",
                 ret: n,
-                isErr: +t,
                 from: s,
               };
+              "boolean" === typeof t && (n.isErr = +t);
               u.publishSpeed(n, c);
               o(e);
             });
