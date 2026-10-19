@@ -1,6 +1,6 @@
 {
   "name": "@cmeslib/fe-monitor-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Self-hosted frontend monitoring SDK, compatible with the supplied Aegis 1.43.60 API and wire protocol",
   "main": "./dist/cmes-monitor.cjs",
   "scripts": {

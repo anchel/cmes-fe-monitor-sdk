@@ -29,35 +29,35 @@ npm i @cmeslib/fe-monitor-sdk
 也可以通过本地目录或 `npm pack` 生成的 tarball 安装到业务项目，再使用：
 
 ```ts
-import CmesMonitor from '@cmeslib/fe-monitor-sdk';
+import CmesMonitor from "@cmeslib/fe-monitor-sdk";
 
 const monitor = new CmesMonitor({
-  id: 'your-project-id',
-  uin: 'your-user-id',
-  hostUrl: 'https://monitor.your-company.example/monitor',
+  id: "your-project-id",
+  uin: "your-user-id",
+  hostUrl: "https://monitor.your-company.example/monitor",
   reportApiSpeed: true,
   reportAssetSpeed: true,
   spa: true,
-  env: 'production',
-  ext1: 'your-app-version',
+  env: "production",
+  ext1: "your-app-version",
 });
 
-monitor.infoAll('应用启动');
-monitor.error({ msg: '订单提交失败', ext2: 'order-123' });
-monitor.reportEvent({ name: 'checkout', ext1: 'cart' });
-monitor.reportTime('checkout_duration', 128);
-monitor.time('render');
+monitor.infoAll("应用启动");
+monitor.error({ msg: "订单提交失败", ext2: "order-123" });
+monitor.reportEvent({ name: "checkout", ext1: "cart" });
+monitor.reportTime("checkout_duration", 128);
+monitor.time("render");
 // 执行业务操作后：
-monitor.timeEnd('render');
-monitor.setConfig({ uin: 'new-user-id' });
+monitor.timeEnd("render");
+monitor.setConfig({ uin: "new-user-id" });
 ```
 
 兼容旧代码：
 
 ```ts
-import Aegis from '@cmeslib/fe-monitor-sdk';
+import Aegis from "@cmeslib/fe-monitor-sdk";
 // 或 import { Aegis } from '@cmeslib/fe-monitor-sdk';
-const aegis = new Aegis({ id: 'project', hostUrl: '/monitor' });
+const aegis = new Aegis({ id: "project", hostUrl: "/monitor" });
 ```
 
 ### Script / CDN
@@ -65,9 +65,9 @@ const aegis = new Aegis({ id: 'project', hostUrl: '/monitor' });
 ```html
 <script src="/assets/cmes-monitor.min.js"></script>
 <script>
-  const monitor = new CmesMonitor({ id: 'project', hostUrl: '/monitor' });
+  const monitor = new CmesMonitor({ id: "project", hostUrl: "/monitor" });
   // window.Aegis === window.CmesMonitor
-  monitor.report('hello');
+  monitor.report("hello");
 </script>
 ```
 
@@ -90,23 +90,23 @@ UMD 同时支持 AMD 和 `const CmesMonitor = require('@cmeslib/fe-monitor-sdk')
 
 ## 保留的功能
 
-| 插件 | 能力 | 默认启用 |
-| --- | --- | --- |
-| `onError` | JS、Promise、资源、媒体、WebSocket 错误 | 是 |
-| `reportApiSpeed` | Fetch/XHR 耗时、业务返回码、请求详情、Trace Header | 否 |
-| `reportAssetSpeed` | 资源 Performance Timing | 否 |
-| `pagePerformance` | DNS/TCP/SSL/TTFB/下载/DOM/首屏 | 是 |
-| `webVitals` | FCP/LCP/FID/CLS/INP/TTI | 是 |
-| `aid` | 匿名标识 | 是 |
-| `device` | 平台、屏幕、网络信息 | 是 |
-| `spa` | History/Hash 路由 PV | 否 |
-| `onClose` | 页面退出时批量刷新与 Beacon | 是 |
-| `clickElementLog` | 点击元素日志 | 否 |
-| `consoleLog` | Console 日志采集 | 否 |
-| `reportBridgeSpeed` | `h5Bridge` 方法测速 | 否 |
-| `blankScreen` | 白屏检测、可选 DOM/canvas 截图 | 否 |
-| `lagMonitor` | Long Animation Frame 卡顿/无响应检测 | 否 |
-| `memoryMonitor` | JS Heap 指标、OOM 阈值日志 | 否 |
+| 插件                | 能力                                               | 默认启用 |
+| ------------------- | -------------------------------------------------- | -------- |
+| `onError`           | JS、Promise、资源、媒体、WebSocket 错误            | 是       |
+| `reportApiSpeed`    | Fetch/XHR 耗时、业务返回码、请求详情、Trace Header | 否       |
+| `reportAssetSpeed`  | 资源 Performance Timing                            | 否       |
+| `pagePerformance`   | DNS/TCP/SSL/TTFB/下载/DOM/首屏                     | 是       |
+| `webVitals`         | FCP/LCP/FID/CLS/INP/TTI                            | 是       |
+| `aid`               | 匿名标识                                           | 是       |
+| `device`            | 平台、屏幕、网络信息                               | 是       |
+| `spa`               | History/Hash 路由 PV                               | 否       |
+| `onClose`           | 页面退出时批量刷新与 Beacon                        | 是       |
+| `clickElementLog`   | 点击元素日志                                       | 否       |
+| `consoleLog`        | Console 日志采集                                   | 否       |
+| `reportBridgeSpeed` | `h5Bridge` 方法测速                                | 否       |
+| `blankScreen`       | 白屏检测、可选 DOM/canvas 截图                     | 否       |
+| `lagMonitor`        | Long Animation Frame 卡顿/无响应检测               | 否       |
+| `memoryMonitor`     | JS Heap 指标、OOM 阈值日志                         | 否       |
 
 配置 `memoryMonitor: { enabled: true }`、`lagMonitor: { enabled: true }` 才启用这两个插件。具体浏览器须支持对应 Performance API。完整方法和配置类型见 [类型定义](src/index.d.ts)，主要使用方式见 [API 说明](docs/api.md)。
 
@@ -140,16 +140,16 @@ npm pack
 
 构建产物：
 
-| 文件 | 用途 |
-| --- | --- |
-| `dist/cmes-monitor.esm.js` | ESM，命名导出与默认导出 |
-| `dist/cmes-monitor.cjs` | CommonJS，直接导出构造函数 |
-| `dist/cmes-monitor.js` | 可读 UMD，Script/AMD/CommonJS |
-| `dist/cmes-monitor.min.js` | 压缩 UMD |
-| `dist/*.map` | 包含重建源码的 source map |
-| `dist/index.d.ts` | 类型提示 |
+| 文件                       | 用途                          |
+| -------------------------- | ----------------------------- |
+| `dist/cmes-monitor.esm.js` | ESM，命名导出与默认导出       |
+| `dist/cmes-monitor.cjs`    | CommonJS，直接导出构造函数    |
+| `dist/cmes-monitor.js`     | 可读 UMD，Script/AMD/CommonJS |
+| `dist/cmes-monitor.min.js` | 压缩 UMD                      |
+| `dist/*.map`               | 包含重建源码的 source map     |
+| `dist/index.d.ts`          | 类型提示                      |
 
-兼容测试使用相同输入运行原 SDK、可读构建和压缩构建，对比请求方法、地址、查询参数、请求体、日志等级、钩子和实例状态。真实 Chromium 验证浏览器原生接口；覆盖详情和边界见 [兼容说明](docs/compatibility.md)。保留原 `version`/`__version__` 的 `1.43.60`，新增 `sdkName='cmes-monitor-sdk'`、`sdkVersion='1.0.0'` 标识自己的发行版本。
+兼容测试使用相同输入运行原 SDK、可读构建和压缩构建，对比请求方法、地址、查询参数、请求体、日志等级、钩子和实例状态。真实 Chromium 验证浏览器原生接口；覆盖详情和边界见 [兼容说明](docs/compatibility.md)。保留原 `version`/`__version__` 的 `1.43.60`，新增 `sdkName='cmes-monitor-sdk'`、`sdkVersion='1.0.1'` 标识自己的发行版本。
 
 MIT 许可。分发衍生源码或构建产物时一并保留 [LICENSE](LICENSE) 和 [NOTICE](NOTICE)。
 
